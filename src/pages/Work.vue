@@ -1,5 +1,7 @@
 <template>
-	<Header />
+	<Header>
+        Hey, I'm Sebastiaan Benjamins, a designer from The Netherlands
+    </Header>
 
 	<kinesis-container class="kinesis-container">
 		<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -71,12 +73,11 @@ import { defineComponent } from 'vue';
 import { supabase } from '../supabase';
 
 import { Project } from '../types/project';
-import Sun from '../components/icons/sun.vue';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 
 export default defineComponent({
-	components: { Sun, Footer, Header },
+	components: { Footer, Header },
 	data() {
 		return {
 			projects: [] as Project[],

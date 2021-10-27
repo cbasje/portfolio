@@ -1,6 +1,6 @@
 <template>
 	<div class="bg-gray-100 dark:bg-gray-900">
-		<Navigation />
+		<navigation />
 
 		<div class="container mx-auto pt-16">
 			<router-view />
