@@ -10,10 +10,9 @@
   "dependencies": {
     "@headlessui/vue": "^1.4.1",
     "@heroicons/vue": "^1.0.5",
-    "@supabase/supabase-js": "^1.25.0",
+    "@supabase/supabase-js": "^1.25.1",
     "vue": "^3.2.16",
-    "vue-kinesis": "^2.0.5",
-    "vue-supabase": "^2.2.1"
+    "vue-kinesis": "^2.0.5"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.9.3",
