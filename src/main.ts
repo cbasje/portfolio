@@ -3,15 +3,9 @@ import App from './App.vue';
 
 import './index.css';
 import VueKinesis from 'vue-kinesis';
-// import VueSupabase from 'vue-supabase';
 
-const app = createApp(App);
+import router from './router';
 
-// app.use(VueSupabase, {
-// 	supabaseUrl: import.meta.env.VITE_SUPABASE_URL,
-// 	supabaseKey: import.meta.env.VITE_SUPABASE_ANON_KEY,
-// 	supabaseOptions: {},
-// });
-app.use(VueKinesis);
+const app = createApp(App).use(VueKinesis).use(router);
 
 app.mount('#app');
