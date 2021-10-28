@@ -1,21 +1,21 @@
 <template>
 	<Header>
-        Hey, I'm Sebastiaan Benjamins, a designer from The Netherlands
-    </Header>
+		Hey, I'm Sebastiaan Benjamins, a designer from The Netherlands
+	</Header>
 
-	<kinesis-container class="kinesis-container">
+	<div class="kinesis-container">
 		<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
-			<kinesis-element
-				v-for="project in projects"
-				:key="project.id"
-				:strength="2"
-				type="depth"
-				class="group project"
-			>
-				<ProjectItem :project="project" />
-			</kinesis-element>
+			<kinesis-container v-for="project in projects" :key="project.id" class="z-0 hover:z-40">
+				<kinesis-element
+					:strength="3"
+					type="depth"
+					class="group project"
+				>
+					<ProjectItem :project="project" />
+				</kinesis-element>
+			</kinesis-container>
 		</div>
-	</kinesis-container>
+	</div>
 
 	<Footer />
 </template>

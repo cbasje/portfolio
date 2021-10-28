@@ -61,26 +61,130 @@
 					"
 				>
 					<router-link class="flex-shrink-0 flex items-center" to="/">
-						<BenjamiinLogo class="w-8 h-8 text-black dark:text-white" />
+						<BenjamiinLogo
+							class="w-8 h-8 text-black dark:text-white"
+						/>
 					</router-link>
 					<div class="hidden sm:block sm:ml-6">
-						<div class="flex space-x-4">
-							<router-link
+						<div class="flex items-center space-x-4">
+							<template
 								v-for="item in navigation"
 								:key="item.name"
-								:to="item.href"
-								:class="[
-									item.current
-										? 'bg-gray-900 text-white'
-										: 'text-gray-300 hover:bg-gray-700 hover:text-white',
-									'px-3 py-2 rounded-md text-sm font-medium',
-								]"
-								:aria-current="
-									item.current ? 'page' : undefined
-								"
 							>
-								{{ item.name }}
-							</router-link>
+								<router-link
+									v-if="!item.subItems"
+									:to="item.href"
+									class="
+										text-gray-700
+										dark:text-gray-300
+										hover:bg-gray-300
+										dark:hover:bg-gray-700
+										hover:text-black
+										dark:hover:text-white
+										bg-transparent
+                                        bg-opacity-75
+                                        hover:bg-opacity-75
+										px-3
+										py-2
+										rounded-md
+										text-sm
+										font-medium
+                                        uppercase
+									"
+									active-class="bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
+									:aria-current="
+										item.current ? 'page' : undefined
+									"
+								>
+									{{ item.name }}
+								</router-link>
+
+								<Menu v-else as="div" class="relative">
+									<router-link
+										:to="item.href"
+										class="
+											group
+											hover:bg-gray-300
+											dark:hover:bg-gray-700
+											text-gray-700
+											dark:text-gray-300
+											hover:text-black
+											dark:hover:text-white
+											bg-transparent
+                                            bg-opacity-75
+                                            hover:bg-opacity-75
+											rounded-md
+											px-3
+											py-2
+										"
+										active-class="bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
+									>
+										<MenuButton
+											class="
+												inline-flex
+												items-center
+												text-sm
+												font-medium
+                                                uppercase
+											"
+										>
+											{{ item.name }}
+											<ChevronDownIcon
+												:class="[
+													open
+														? 'text-gray-600'
+														: 'text-gray-400',
+													'ml-2 h-5 w-5 group-hover:text-gray-500',
+												]"
+												aria-hidden="true"
+											/>
+										</MenuButton>
+									</router-link>
+
+									<transition
+										enter-active-class="transition ease-out duration-100"
+										enter-from-class="transform opacity-0 scale-95"
+										enter-to-class="transform opacity-100 scale-100"
+										leave-active-class="transition ease-in duration-75"
+										leave-from-class="transform opacity-100 scale-100"
+										leave-to-class="transform opacity-0 scale-95"
+									>
+										<MenuItems
+											class="
+												origin-top-left
+												absolute
+												mt-2
+												w-48
+												rounded-md
+												shadow-lg
+												py-1
+												bg-white
+												ring-1 ring-black ring-opacity-5
+												focus:outline-none
+											"
+										>
+											<MenuItem
+												v-slot="{ active }"
+												v-for="subItem in item.subItems"
+												:key="subItem.name"
+											>
+												<router-link
+													:to="subItem.href"
+													:class="[
+														active
+															? 'bg-gray-100'
+															: '',
+														'block px-4 py-2 text-sm text-gray-700',
+													]"
+													exact-active-class="bg-pink-500"
+												>
+													{{ subItem.name }}
+												</router-link>
+											</MenuItem>
+										</MenuItems>
+									</transition>
+								</Menu>
+							</template>
 						</div>
 					</div>
 				</div>
@@ -152,11 +256,27 @@ import {
 	MenuItem,
 	MenuItems,
 } from '@headlessui/vue';
-import { BellIcon, MenuIcon, XIcon } from '@heroicons/vue/outline';
+import {
+	BellIcon,
+	MenuIcon,
+	XIcon,
+	ChevronDownIcon,
+} from '@heroicons/vue/outline';
 import BenjamiinLogo from './logos/Benjamiin.vue';
 
 const navigation = [
-	{ name: 'Work', href: '/work', current: true },
+	{
+		name: 'Work',
+		href: '/work',
+		current: true,
+		subItems: [
+			{
+				name: 'Graphic Design',
+				href: '/work/graphic-design',
+				current: true,
+			},
+		],
+	},
 	{ name: 'Fun', href: '/fun', current: false },
 	{ name: 'Contact', href: '/contact', current: false },
 ];
@@ -173,6 +293,7 @@ export default {
 		BellIcon,
 		MenuIcon,
 		XIcon,
+		ChevronDownIcon,
 		BenjamiinLogo,
 	},
 	setup() {

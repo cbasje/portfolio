@@ -53,14 +53,14 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-import { Project } from '@/types/project'
+import { Project } from '@/types/project';
 
 export default defineComponent({
 	props: {
 		project: {
 			type: Object as PropType<Project>,
-			default: {}
-		}
-	}
+			default: {},
+		},
+	},
 });
 </script>
