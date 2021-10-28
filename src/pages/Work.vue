@@ -53,7 +53,6 @@ export default defineComponent({
 				const project = body[n];
 
 				const url = await this.loadImage(project.image);
-				console.log(url);
 				this.projects[n].url = url;
 			}
 		},
@@ -63,7 +62,6 @@ export default defineComponent({
 				.getPublicUrl(url);
 
 			this.imageUrl = data ? data?.publicURL : '';
-			console.log(data, this.imageUrl);
 			return data ? data?.publicURL : '';
 		},
 	},

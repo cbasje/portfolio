@@ -12,6 +12,7 @@
     "@heroicons/vue": "^1.0.5",
     "@supabase/supabase-js": "^1.25.1",
     "@tailwindcss/aspect-ratio": "^0.3.0",
+    "moment": "^2.29.1",
     "vue": "^3.2.16",
     "vue-kinesis": "^2.0.5",
     "vue-router": "4"
