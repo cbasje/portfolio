@@ -1,5 +1,5 @@
 <template>
-	<nav
+	<header
 		class="
 			w-screen
 			fixed
@@ -10,23 +10,38 @@
 			dark:from-gray-900
 		"
 	>
-		<div class="flex justify-between">
-			<div>
+		<div class="flex">
+			<nav class="flex-1 flex justify-start">
 				<router-link
 					v-for="tab in tabs"
 					:key="tab.id"
-					class="text-black dark:text-white"
+					class="
+						text-black
+						dark:text-white
+						active:font-bold
+						uppercase
+						font-display
+						pr-3
+					"
 					:to="tab.link"
+					active-class="font-bold"
 				>
 					{{ tab.title }}
 				</router-link>
-			</div>
-			<router-link class="text-black dark:text-white" to="/">
+			</nav>
+
+			<router-link
+				class="text-black dark:text-white font-display flex-none"
+				to="/"
+			>
 				<p>benjamiin.</p>
 			</router-link>
-			<sun class="text-black dark:text-white w-6 h-6" />
+
+			<div class="flex-1 flex justify-end">
+				<Sun class="text-black dark:text-white w-6 h-6" />
+			</div>
 		</div>
-	</nav>
+	</header>
 </template>
 
 <script lang="ts">
@@ -39,8 +54,9 @@ export default defineComponent({
 	data() {
 		return {
 			tabs: [
-				{ id: 1, title: 'Fun', link: '/fun' },
-				{ id: 2, title: 'Work', link: '/work' },
+				{ id: 1, title: 'Work', link: '/work' },
+				{ id: 2, title: 'Fun', link: '/fun' },
+				{ id: 3, title: 'Contact', link: '/contact' },
 			],
 		};
 	},

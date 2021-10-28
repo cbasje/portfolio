@@ -8,59 +8,11 @@
 			<kinesis-element
 				v-for="project in projects"
 				:key="project.id"
-				:strength="3"
+				:strength="2"
 				type="depth"
-				class="group w-full"
+				class="group project"
 			>
-				<div
-					class="
-						w-full
-						h-full
-						transition
-						duration-500
-						ease-in-out
-						transform
-						group-hover:scale-105
-						motion-reduce:transform-none
-						bg-gray-100
-						dark:bg-gray-900
-					"
-				>
-					<img
-						alt="Vue logo"
-						:src="project.url"
-						class="
-							w-full
-							h-full
-							object-cover
-							transition
-							duration-500
-							ease-in-out
-							group-hover:opacity-20
-						"
-					/>
-				</div>
-				<div
-					class="
-						flex
-						justify-center
-						items-center
-						w-full
-						h-full
-						absolute
-						top-0
-						p-3
-						opacity-0
-						group-hover:opacity-100
-						transition
-						duration-500
-						ease-in-out
-					"
-				>
-					<p class="text-gray-900 dark:text-gray-100">
-						{{ project.title }}
-					</p>
-				</div>
+				<ProjectItem :project="project" />
 			</kinesis-element>
 		</div>
 	</kinesis-container>
@@ -75,17 +27,14 @@ import { supabase } from '../supabase';
 import { Project } from '../types/project';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
+import ProjectItem from '@/components/ProjectItem.vue';
 
 export default defineComponent({
-	components: { Footer, Header },
+	components: { Footer, Header, ProjectItem },
 	data() {
 		return {
 			projects: [] as Project[],
 			imageUrl: '',
-			positions: [
-				{ top: 130, right: 250, circle: 'yellow' },
-				{ top: 270, right: -330, circle: 'purple' },
-			],
 		};
 	},
 	mounted() {
@@ -127,6 +76,6 @@ export default defineComponent({
 }
 
 .project {
-	@apply w-full;
+	@apply w-full aspect-w-3 aspect-h-4;
 }
 </style>
