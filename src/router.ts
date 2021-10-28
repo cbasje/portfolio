@@ -1,5 +1,4 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import { RouteRecordRaw } from 'vue-router';
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 
 import Work from './pages/Work.vue';
 import Contact from './pages/Contact.vue';
@@ -8,7 +7,7 @@ import Fun from './pages/Fun.vue';
 const routes: Array<RouteRecordRaw> = [
 	{
 		path: '/',
-		redirect: '/work',
+		redirect: 'work',
 	},
 	{
 		path: '/fun',
@@ -25,7 +24,8 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-	history: createWebHashHistory(),
+	// history: createWebHashHistory(),
+	history: createWebHistory(),
 	routes,
 });
 
