@@ -112,8 +112,8 @@
 											bg-transparent bg-opacity-75
 											hover:bg-opacity-75
 											rounded-md
-											px-3
-											py-2
+											pl-3
+											pr-1
 											inline-flex
 											items-center
 											text-sm
@@ -122,14 +122,16 @@
 										"
 										active-class="bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
 									>
-										{{ item.name }}
+										<span class="py-2">
+											{{ item.name }}
+										</span>
 										<MenuButton>
 											<ChevronDownIcon
 												:class="[
 													open
 														? 'text-gray-600'
 														: 'text-gray-400',
-													'ml-2 h-5 w-5 group-hover:text-gray-500',
+													'm-2 h-5 w-5 group-hover:text-gray-500',
 												]"
 												aria-hidden="true"
 											/>
