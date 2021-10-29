@@ -81,15 +81,14 @@
 										dark:hover:bg-gray-700
 										hover:text-black
 										dark:hover:text-white
-										bg-transparent
-                                        bg-opacity-75
-                                        hover:bg-opacity-75
+										bg-transparent bg-opacity-75
+										hover:bg-opacity-75
 										px-3
 										py-2
 										rounded-md
 										text-sm
 										font-medium
-                                        uppercase
+										uppercase
 									"
 									active-class="bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
 									:aria-current="
@@ -110,25 +109,21 @@
 											dark:text-gray-300
 											hover:text-black
 											dark:hover:text-white
-											bg-transparent
-                                            bg-opacity-75
-                                            hover:bg-opacity-75
+											bg-transparent bg-opacity-75
+											hover:bg-opacity-75
 											rounded-md
 											px-3
 											py-2
+											inline-flex
+											items-center
+											text-sm
+											font-medium
+											uppercase
 										"
 										active-class="bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
 									>
-										<MenuButton
-											class="
-												inline-flex
-												items-center
-												text-sm
-												font-medium
-                                                uppercase
-											"
-										>
-											{{ item.name }}
+										{{ item.name }}
+										<MenuButton>
 											<ChevronDownIcon
 												:class="[
 													open
