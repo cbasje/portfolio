@@ -35,7 +35,7 @@ const getters: GetterTree<ProjectState, RootState> = {
 			(state.selectedId && state.detailEntities[state.selectedId]) || null
 		);
 	},
-	getProjectsFromCategort(state: ProjectState) {
+	getProjectsFromCategory(state: ProjectState) {
 		const allProjects = state.ids.map((id: string) => state.entities[id]);
 		const category = state.category;
 
@@ -44,7 +44,7 @@ const getters: GetterTree<ProjectState, RootState> = {
 		}
 
 		return allProjects.filter(
-			(project: Project) => project.category === category
+			(project: Project) => project.categories.title === category
 		);
 	},
 };
@@ -53,9 +53,17 @@ const actions: ActionTree<ProjectState, RootState> = {
 	async loadProjects({ commit, dispatch }) {
 		const { body, error } = await supabase
 			.from<Project>('projects')
-			.select('*');
+			.select(`
+				*,
+				categories (
+					id,
+					title
+			  	)
+			`)
+			.order('date', { ascending: false });
 
 		if (body == null) return;
+		console.log(body);
 
 		body.forEach((project: Project) => {
 			dispatch('loadImage', project);

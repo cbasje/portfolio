@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
-import Category from '@/pages/Category.vue';
-import CategoryItem from '@/pages/CategoryItem.vue';
-import Contact from '@/pages/Contact.vue';
+const Category = () => import('@/pages/Category.vue');
+const CategoryItem = () => import('@/pages/CategoryItem.vue');
+const Contact = () => import('@/pages/Contact.vue');
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -11,11 +11,11 @@ const routes: Array<RouteRecordRaw> = [
 	},
 	{
 		path: '/:categoryId',
-		component: Category
+		component: Category,
 	},
 	{
 		path: '/:categoryId/:projectId',
-		component: CategoryItem
+		component: CategoryItem,
 	},
 	{
 		path: '/contact',

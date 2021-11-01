@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
@@ -36,6 +36,11 @@ export default defineComponent({
 	components: { Footer, Header, ProjectItem },
 	mounted() {
 		this.selectCategory(this.$route.params.categoryId);
+
+		this.$router.beforeEach((to, from) => {
+			if (to.params.categoryId)
+				this.selectCategory(to.params.categoryId);
+		});
 	},
 	methods: {
 		...mapMutations('projects', {
@@ -52,7 +57,7 @@ export default defineComponent({
 			}
 		},
 		...mapGetters('projects', {
-			projects: 'getAllProjects',
+			projects: 'getProjectsFromCategory',
 		}),
 	},
 });
