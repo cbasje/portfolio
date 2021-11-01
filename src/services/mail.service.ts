@@ -1,20 +1,21 @@
 import { ContactForm } from '@/types/contact-form';
-import SendGrid from '@sendgrid/mail';
+import axios from 'axios';
 
 export default {
 	sendEmail(form: ContactForm) {
-		SendGrid.setApiKey(
-			'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'
-		);
-		const msg = {
-			to: 'sebastiaan@benjami.in', // Change to your recipient
-			from: 'sebastiaan@benjami.in', // Change to your verified sender
-			subject: 'Sending with SendGrid is Fun',
-			text: 'and easy to do anywhere, even with Node.js',
-			html: `<strong>and easy to do anywhere, even with Node.js</strong><br/><br/>${form}`,
-		};
+		const baseUrl = 'https://portfolio-api-ten.vercel.app/api';
+		const url = baseUrl + '/';
 
-		SendGrid.send(msg)
+		const data = {
+			to: 'sebastiaan@benjami.in',
+			from: 'sebastiaan@benjami.in',
+			replyTo: form.email,
+			subject: `Message from ${form.firstName} ${form.lastName}`,
+			text: `A message has been posted from ${form.firstName} ${form.lastName} at ${form.email}:`,
+			html: `<p>A message has been posted from ${form.firstName} ${form.lastName} at ${form.email}:</p><blockquote>${form.message}</blockquote>`,
+		};
+		axios
+			.post(url, data)
 			.then(() => {
 				console.log('Email sent');
 			})
