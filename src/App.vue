@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-gray-100 dark:bg-gray-900">
+	<div class="bg-gray-100 dark:bg-gray-900 min-h-screen">
 		<Navigation />
 
 		<div class="container mx-auto pt-16 px-3">

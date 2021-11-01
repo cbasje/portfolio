@@ -54,7 +54,7 @@
 		>
 			{{ project.title }}
 		</h1>
-		<h1
+		<p
 			class="
 				font-display
 				text-black
@@ -62,7 +62,7 @@
 			"
 		>
 			{{ formatDate(project.date) }}
-		</h1>
+		</p>
 		<p class="font-display text-gray-700 dark:text-gray-300">
 			{{ project.keywords }}
 		</p>

@@ -1,11 +1,19 @@
 <template>
-	<Header class="text-center">
-		{{ project ? project.title : 'Title' }}
+	<Header v-if="project" class="text-center">
+		<template #default>
+			{{ project.title }}
+		</template>
+
+		<template #subtitle>{{ formatDate(project.date) }}</template>
 	</Header>
 
 	<div v-if="project">
-		<p class="prose lg:prose-xl">{{ project.text ? project.text : '' }}</p>
 		<img :src="project.url" :alt="project.title" class="w-full" />
+		<MarkdownDisplay
+			v-if="project.text"
+			class="mt-8"
+			:markdown="project.text"
+		/>
 	</div>
 
 	<Footer />
@@ -16,11 +24,14 @@ import { defineComponent } from 'vue';
 import { useRoute } from 'vue-router';
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 
-import Footer from '../components/Footer.vue';
-import Header from '../components/Header.vue';
+import moment from 'moment';
+
+import Footer from '@/components/Footer.vue';
+import Header from '@/components/Header.vue';
+import MarkdownDisplay from '@/components/MarkdownDisplay.vue';
 
 export default defineComponent({
-	components: { Footer, Header },
+	components: { Footer, Header, MarkdownDisplay },
 	setup() {
 		const route = useRoute();
 		const { projectId } = route.params;
@@ -34,6 +45,9 @@ export default defineComponent({
 		await this.loadSelectedProject();
 	},
 	methods: {
+		formatDate(date: Date) {
+			return moment(date).format('MMMM, YYYY')
+		},
 		...mapMutations('projects', {
 			selectProject: 'selectProject',
 		}),
