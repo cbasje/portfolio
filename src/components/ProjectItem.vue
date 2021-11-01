@@ -29,7 +29,7 @@
 	</div>
 	<div
 		class="
-			flex
+			flex flex-col
 			justify-center
 			items-center
 			w-full
@@ -44,14 +44,35 @@
 			ease-in-out
 		"
 	>
-		<p class="text-gray-900 dark:text-gray-100">
+		<h1
+			class="
+				font-display font-semibold
+				uppercase
+				text-xl text-black
+				dark:text-white
+			"
+		>
 			{{ project.title }}
+		</h1>
+		<h1
+			class="
+				font-display
+				text-black
+				dark:text-white
+			"
+		>
+			{{ formatDate(project.date) }}
+		</h1>
+		<p class="font-display text-gray-700 dark:text-gray-300">
+			{{ project.keywords }}
 		</p>
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+
+import moment from 'moment';
 
 import { Project } from '@/types/project';
 
@@ -62,5 +83,10 @@ export default defineComponent({
 			default: {},
 		},
 	},
+	methods: {
+		formatDate(date: Date) {
+			return moment(date).format('MMM, YYYY')
+		}
+	}
 });
 </script>

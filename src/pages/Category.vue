@@ -6,8 +6,8 @@
 	<div class="kinesis-container">
 		<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
 			<template v-for="project in projects" :key="project.id">
-				<router-link :to="`/${$route.params.categoryId}/${project.id}`">
-					<kinesis-container class="z-0 hover:z-40">
+				<router-link :to="`/${$route.params.categoryId}/${project.id}`" class="z-0 hover:z-40">
+					<kinesis-container>
 						<kinesis-element
 							:strength="3"
 							type="depth"

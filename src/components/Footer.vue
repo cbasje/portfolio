@@ -12,6 +12,7 @@ import moment from 'moment';
 export default defineComponent({
     data() {
         const year = moment().format('YYYY')
+        
         return {
             year
         }
