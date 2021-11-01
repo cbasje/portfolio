@@ -1,30 +1,45 @@
 <template>
-	<Header>
-		{{ project.title }}
+	<Header class="text-center">
+		{{ project ? project.title : 'Title' }}
 	</Header>
 
-	<div class="container mx-auto px-2"></div>
+	<div v-if="project">
+		<p>{{ project.text ? project.text : '' }}</p>
+		<img :src="project.url" :alt="project.title" class="w-full" />
+	</div>
 
-    <Footer />
+	<Footer />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { useRoute } from 'vue-router';
+import { mapActions, mapGetters, mapMutations } from 'vuex';
 
-import { Project } from '@/types/project';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 
 export default defineComponent({
 	components: { Footer, Header },
-	data() {
+	setup() {
+		const route = useRoute();
+		const { projectId } = route.params;
+
 		return {
-			project: {} as Project
-		}
+			projectId,
+		};
 	},
-	mounted() {
-		console.log(this.$route.params.category);
-		// this.loadProjects();
+	async mounted() {
+		await this.selectProject(this.projectId);
+		await this.loadSelectedProject();
+	},
+	methods: {
+		...mapMutations('projects', {
+			selectProject: 'selectProject',
+		}),
+		...mapActions('projects', {
+			loadSelectedProject: 'loadSelectedProject',
+		}),
 	},
 	computed: {
 		headerText() {
@@ -35,6 +50,9 @@ export default defineComponent({
 					return "Hey, I'm Sebastiaan Benjamins, a designer from The Netherlands";
 			}
 		},
+		...mapGetters('projects', {
+			project: 'getSelectedProject',
+		}),
 	},
 });
 </script>

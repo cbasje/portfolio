@@ -5,5 +5,10 @@ export interface Project {
 	image: string;
 	date: Date;
 	keywords: string;
+	category: string;
 	url?: string;
+}
+
+export interface ProjectDetail extends Project {
+	text: string
 }

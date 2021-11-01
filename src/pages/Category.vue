@@ -6,7 +6,7 @@
 	<div class="kinesis-container">
 		<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
 			<template v-for="project in projects" :key="project.id">
-				<router-link :to="`/${$route.params.category}/${project.id}`">
+				<router-link :to="`/${$route.params.categoryId}/${project.id}`">
 					<kinesis-container class="z-0 hover:z-40">
 						<kinesis-element
 							:strength="3"
@@ -26,59 +26,34 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { supabase } from '../supabase';
 
-import { Project } from '../types/project';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 import ProjectItem from '@/components/ProjectItem.vue';
+import { mapGetters, mapMutations } from 'vuex';
 
 export default defineComponent({
 	components: { Footer, Header, ProjectItem },
-	data() {
-		return {
-			projects: [] as Project[],
-			imageUrl: '',
-		};
-	},
 	mounted() {
-		console.log(this.$route.params.category);
-		this.loadProjects();
+		this.selectCategory(this.$route.params.categoryId);
 	},
 	methods: {
-		async loadProjects() {
-			const { body, error } = await supabase
-				.from<Project>('projects')
-				.select('*');
-
-			if (body == null) return;
-
-			this.projects = body;
-			for (let n = 0; n < body.length; n++) {
-				const project = body[n];
-
-				const url = await this.loadImage(project.image);
-				this.projects[n].url = url;
-			}
-		},
-		async loadImage(url: string): Promise<string> {
-			const { data, error } = await supabase.storage
-				.from('images')
-				.getPublicUrl(url);
-
-			this.imageUrl = data ? data?.publicURL : '';
-			return data ? data?.publicURL : '';
-		},
+		...mapMutations('projects', {
+			selectCategory: 'selectCategory',
+		}),
 	},
 	computed: {
 		headerText() {
-			switch (this.$route.params.category) {
+			switch (this.$route.params.categoryId) {
 				case 'fun':
 					return 'Welcome to my Fun Page! This is where I share challenges and other projects';
 				default:
 					return "Hey, I'm Sebastiaan Benjamins, a designer from The Netherlands";
 			}
 		},
+		...mapGetters('projects', {
+			projects: 'getAllProjects',
+		}),
 	},
 });
 </script>

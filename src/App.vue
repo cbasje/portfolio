@@ -10,10 +10,19 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapActions } from 'vuex';
 
 import Navigation from './components/NavigationTW.vue';
 
 export default defineComponent({
 	components: { Navigation },
+	async mounted() {
+		await this.loadProjects();
+	},
+	methods: {
+		...mapActions('projects', {
+			loadProjects: 'loadProjects',
+		}),
+	},
 });
 </script>

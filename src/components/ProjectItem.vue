@@ -14,7 +14,7 @@
 		"
 	>
 		<img
-			alt="Vue logo"
+			:alt="project.title"
 			:src="project.url"
 			class="
 				w-full
