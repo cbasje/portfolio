@@ -4,7 +4,7 @@
 	</Header>
 
 	<div v-if="project">
-		<p>{{ project.text ? project.text : '' }}</p>
+		<p class="prose lg:prose-xl">{{ project.text ? project.text : '' }}</p>
 		<img :src="project.url" :alt="project.title" class="w-full" />
 	</div>
 

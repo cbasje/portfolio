@@ -75,22 +75,19 @@
 									v-if="!item.subItems"
 									:to="item.href"
 									class="
-										text-gray-700
-										dark:text-gray-300
-										hover:bg-gray-300
-										dark:hover:bg-gray-700
-										hover:text-black
-										dark:hover:text-white
+										text-black
+										dark:text-white
+										hover:bg-gray-200
+										dark:hover:bg-gray-800
 										bg-transparent bg-opacity-75
 										hover:bg-opacity-75
 										px-3
 										py-2
 										rounded-md
 										text-sm
-										font-medium
 										uppercase
 									"
-									active-class="bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
+									active-class="font-bold"
 									:aria-current="
 										item.current ? 'page' : undefined
 									"
@@ -103,12 +100,10 @@
 										:to="item.href"
 										class="
 											group
-											hover:bg-gray-300
-											dark:hover:bg-gray-700
-											text-gray-700
-											dark:text-gray-300
-											hover:text-black
-											dark:hover:text-white
+										text-black
+										dark:text-white
+										hover:bg-gray-200
+										dark:hover:bg-gray-800
 											bg-transparent bg-opacity-75
 											hover:bg-opacity-75
 											rounded-md
@@ -117,10 +112,9 @@
 											inline-flex
 											items-center
 											text-sm
-											font-medium
 											uppercase
 										"
-										active-class="bg-gray-200 dark:bg-gray-800 text-black dark:text-white"
+										active-class="font-bold"
 									>
 										<span class="py-2">
 											{{ item.name }}
@@ -173,7 +167,7 @@
 															: '',
 														'block px-4 py-2 text-sm text-gray-700',
 													]"
-													exact-active-class="bg-gray-500"
+													exact-active-class="bg-amber-500"
 												>
 													{{ subItem.name }}
 												</router-link>
@@ -185,6 +179,8 @@
 						</div>
 					</div>
 				</div>
+
+				<!-- FIXME -->
 				<ul
 					class="
 						absolute
@@ -196,7 +192,7 @@
 						sm:static sm:inset-auto sm:ml-6 sm:pr-0
 					"
 				>
-					<li v-for="link in socialLinks" :key="link.id" class="pr-3">
+					<li v-for="link in socialLinks" :key="link.id" class="flex pl-3">
 						<a
 							class="
 								text-black
@@ -259,6 +255,8 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+
 import {
 	Disclosure,
 	DisclosureButton,
@@ -274,7 +272,12 @@ import {
 	XIcon,
 	ChevronDownIcon,
 } from '@heroicons/vue/outline';
+
+import Sun from '../components/icons/sun.vue';
 import BenjamiinLogo from './logos/Benjamiin.vue';
+import LinkedInLogo from './logos/LinkedIn.vue';
+import InstagramLogo from './logos/Instagram.vue';
+import GithubLogo from './logos/Github.vue';
 
 const navigation = [
 	{
@@ -310,8 +313,13 @@ const socialLinks = [
 	},
 ];
 
-export default {
+export default defineComponent({
 	components: {
+		Sun,
+		BenjamiinLogo,
+		LinkedInLogo,
+		InstagramLogo,
+		GithubLogo,
 		Disclosure,
 		DisclosureButton,
 		DisclosurePanel,
@@ -323,7 +331,6 @@ export default {
 		MenuIcon,
 		XIcon,
 		ChevronDownIcon,
-		BenjamiinLogo,
 	},
 	setup() {
 		return {
@@ -331,5 +338,5 @@ export default {
 			socialLinks,
 		};
 	},
-};
+});
 </script>

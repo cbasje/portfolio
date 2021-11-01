@@ -1,4 +1,4 @@
-const colors = require('tailwindcss/colors')
+const colors = require('tailwindcss/colors');
 
 module.exports = {
 	mode: 'jit',
@@ -6,8 +6,10 @@ module.exports = {
 	darkMode: 'media',
 	theme: {
 		colors: {
+			black: colors.black,
 			gray: colors.gray,
-			white: colors.white
+			white: colors.white,
+			amber: colors.yellow
 		},
 		fontFamily: {
 			display: ['Poppins', 'sans-serif'],
@@ -17,5 +19,9 @@ module.exports = {
 	variants: {
 		extend: {},
 	},
-	plugins: [require('@tailwindcss/aspect-ratio')],
+	plugins: [
+		require('@tailwindcss/aspect-ratio'),
+		require('@tailwindcss/typography'),
+		require('@tailwindcss/forms'),
+	],
 };
