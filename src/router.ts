@@ -1,8 +1,8 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router';
 
-import Work from './pages/Work.vue';
+import Category from './pages/Category.vue';
+import CategoryItem from './pages/CategoryItem.vue';
 import Contact from './pages/Contact.vue';
-import Fun from './pages/Fun.vue';
 
 const routes: Array<RouteRecordRaw> = [
 	{
@@ -10,12 +10,12 @@ const routes: Array<RouteRecordRaw> = [
 		redirect: 'work',
 	},
 	{
-		path: '/fun',
-		component: Fun,
+		path: '/:category',
+		component: Category
 	},
 	{
-		path: '/work',
-		component: Work,
+		path: '/:category/:item',
+		component: CategoryItem
 	},
 	{
 		path: '/contact',

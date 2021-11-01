@@ -173,7 +173,7 @@
 															: '',
 														'block px-4 py-2 text-sm text-gray-700',
 													]"
-													exact-active-class="bg-pink-500"
+													exact-active-class="bg-gray-500"
 												>
 													{{ subItem.name }}
 												</router-link>
@@ -185,7 +185,7 @@
 						</div>
 					</div>
 				</div>
-				<div
+				<ul
 					class="
 						absolute
 						inset-y-0
@@ -196,7 +196,22 @@
 						sm:static sm:inset-auto sm:ml-6 sm:pr-0
 					"
 				>
-					<button
+					<li v-for="link in socialLinks" :key="link.id" class="pr-3">
+						<a
+							class="
+								text-black
+								dark:text-white
+								inline-block
+								w-6
+								h-6
+							"
+							:href="link.link"
+							target="_blank"
+						>
+							<component :is="link.logo" />
+						</a>
+					</li>
+					<!-- <button
 						type="button"
 						class="
 							bg-gray-800
@@ -213,8 +228,8 @@
 					>
 						<span class="sr-only">View notifications</span>
 						<BellIcon class="h-6 w-6" aria-hidden="true" />
-					</button>
-				</div>
+					</button> -->
+				</ul>
 			</div>
 		</div>
 
@@ -269,13 +284,30 @@ const navigation = [
 		subItems: [
 			{
 				name: 'Graphic Design',
-				href: '/work/graphic-design',
+				href: '/work',
 				current: true,
 			},
 		],
 	},
 	{ name: 'Fun', href: '/fun', current: false },
 	{ name: 'Contact', href: '/contact', current: false },
+];
+const socialLinks = [
+	{
+		id: 1,
+		logo: 'LinkedInLogo',
+		link: 'https://www.linkedin.com/in/sebastiaanbenjamins/',
+	},
+	{
+		id: 2,
+		logo: 'InstagramLogo',
+		link: 'http://instagram.com/cbasje',
+	},
+	{
+		id: 3,
+		logo: 'GithubLogo',
+		link: 'https://github.com/sebastiaanb',
+	},
 ];
 
 export default {
@@ -296,6 +328,7 @@ export default {
 	setup() {
 		return {
 			navigation,
+			socialLinks,
 		};
 	},
 };

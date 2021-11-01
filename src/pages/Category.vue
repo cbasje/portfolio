@@ -1,21 +1,25 @@
 <template>
-    <Header>
-        Welcome to my Fun Page! This is where I share challenges and other projects
-    </Header>
+	<Header>
+		{{ headerText }}
+	</Header>
 
-	<kinesis-container class="kinesis-container">
+	<div class="kinesis-container">
 		<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-3">
-			<kinesis-element
-				v-for="project in projects"
-				:key="project.id"
-				:strength="2"
-				type="depth"
-				class="group project"
-			>
-				<ProjectItem :project="project" />
-			</kinesis-element>
+			<template v-for="project in projects" :key="project.id">
+				<router-link :to="`/${$route.params.category}/${project.id}`">
+					<kinesis-container class="z-0 hover:z-40">
+						<kinesis-element
+							:strength="3"
+							type="depth"
+							class="group project"
+						>
+							<ProjectItem :project="project" />
+						</kinesis-element>
+					</kinesis-container>
+				</router-link>
+			</template>
 		</div>
-	</kinesis-container>
+	</div>
 
 	<Footer />
 </template>
@@ -38,6 +42,7 @@ export default defineComponent({
 		};
 	},
 	mounted() {
+		console.log(this.$route.params.category);
 		this.loadProjects();
 	},
 	methods: {
@@ -65,5 +70,25 @@ export default defineComponent({
 			return data ? data?.publicURL : '';
 		},
 	},
-})
+	computed: {
+		headerText() {
+			switch (this.$route.params.category) {
+				case 'fun':
+					return 'Welcome to my Fun Page! This is where I share challenges and other projects';
+				default:
+					return "Hey, I'm Sebastiaan Benjamins, a designer from The Netherlands";
+			}
+		},
+	},
+});
 </script>
+
+<style>
+.kinesis-container {
+	@apply relative flex flex-col items-center min-h-screen pb-3;
+}
+
+.project {
+	@apply w-full aspect-w-3 aspect-h-4;
+}
+</style>
