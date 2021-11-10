@@ -204,7 +204,7 @@ export default defineComponent({
 	},
 	methods: {
 		submitForm() {
-			mailService.sendEmail({
+			mailService.addToAirtable({
 				firstName: this.firstName,
 				lastName: this.lastName,
 				email: this.email,
