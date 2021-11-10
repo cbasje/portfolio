@@ -204,12 +204,24 @@ export default defineComponent({
 	},
 	methods: {
 		submitForm() {
-			mailService.addToAirtable({
-				firstName: this.firstName,
-				lastName: this.lastName,
-				email: this.email,
-				message: this.message,
-			});
+			mailService
+				.addToAirtable({
+					firstName: this.firstName,
+					lastName: this.lastName,
+					email: this.email,
+					message: this.message,
+				})
+				.then(() => {
+					// console.log('Email sent');
+					this.firstName = '';
+					this.lastName = '';
+					this.email = '';
+					this.message = '';
+				})
+				.catch((error) => {
+					console.error(error);
+					alert('Something went wrong!')
+				});
 		},
 	},
 });

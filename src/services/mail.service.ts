@@ -27,13 +27,6 @@ export default {
 		const baseUrl = 'https://portfolio-api-ten.vercel.app/api';
 		const url = baseUrl + '/airtable';
 		
-		axios
-			.post(url, form)
-			.then(() => {
-				console.log('Email sent');
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+		return axios.post(url, form)
 	},
 };
