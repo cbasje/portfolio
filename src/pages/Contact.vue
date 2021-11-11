@@ -220,7 +220,7 @@ export default defineComponent({
 				})
 				.catch((error) => {
 					console.error(error);
-					alert('Something went wrong!')
+					alert('Something went wrong!');
 				});
 		},
 	},
