@@ -19,6 +19,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 	Airtable.configure({
 		apiKey: process.env.VITE_AIRTABLE_API_KEY,
 	});
+	
 	var base = Airtable.base('appqzvwxOn6A2cxuo');
 	base('Contactformulier').create(
 		[

@@ -20,7 +20,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 		},
 		(error) => {
 			console.error(error);
-			res.status(400);
+			res.status(500);
 			res.send(error);
 			
 			if (error.response) {

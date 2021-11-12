@@ -63,7 +63,6 @@ const actions: ActionTree<ProjectState, RootState> = {
 			.order('date', { ascending: false });
 
 		if (body == null) return;
-		console.log(body);
 
 		body.forEach((project: Project) => {
 			dispatch('loadImage', project);
