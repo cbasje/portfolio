@@ -10,15 +10,16 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 	);
 
 	if (!req.body) {
-		// res.status(404);
+		res.status(500);
 		res.end();
 		return;
 	}
 
-	var airtable = require('airtable').configure({
+	var Airtable = require('airtable');
+	Airtable.configure({
 		apiKey: process.env.VITE_AIRTABLE_API_KEY,
 	});
-	const base = airtable.base('appqzvwxOn6A2cxuo');
+	var base = Airtable.base('appqzvwxOn6A2cxuo');
 	base('Contactformulier').create(
 		[
 			{
@@ -33,7 +34,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 		function (err, records) {
 			if (err) {
 				console.error(err);
-				res.status(400);
+				res.status(500);
 				res.send(err);
 
 				if (err.response) {
