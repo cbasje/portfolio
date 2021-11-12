@@ -10,7 +10,7 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 	);
 
 	const SendGrid = require('@sendgrid/mail');
-	SendGrid.setApiKey(process.env.SENDGRID_API_KEY);
+	SendGrid.setApiKey(process.env.VITE_SENDGRID_API_KEY);
 	
 	SendGrid.send(req.body).then(
 		(data) => {

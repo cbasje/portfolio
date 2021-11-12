@@ -15,7 +15,10 @@ export default async (req: VercelRequest, res: VercelResponse) => {
 		return;
 	}
 
-	const base = require('airtable').base('appqzvwxOn6A2cxuo');
+	var airtable = require('airtable').configure({
+		apiKey: process.env.VITE_AIRTABLE_API_KEY,
+	});
+	const base = airtable.base('appqzvwxOn6A2cxuo');
 	base('Contactformulier').create(
 		[
 			{
