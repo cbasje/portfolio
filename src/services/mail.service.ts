@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export default {
 	sendEmail(form: ContactForm) {
-		const baseUrl = 'https://portfolio-api-ten.vercel.app/api';
+		const baseUrl = '/api';
 		const url = baseUrl + '/mail';
 
 		const data = {
@@ -14,19 +14,12 @@ export default {
 			text: `A message has been posted from ${form.firstName} ${form.lastName} at ${form.email}:`,
 			html: `<p>A message has been posted from ${form.firstName} ${form.lastName} at ${form.email}:</p><blockquote>${form.message}</blockquote>`,
 		};
-		axios
-			.post(url, data)
-			.then(() => {
-				console.log('Email sent');
-			})
-			.catch((error) => {
-				console.error(error);
-			});
+		return axios.post(url, data);
 	},
 	addToAirtable(form: ContactForm) {
-		const baseUrl = 'https://portfolio-api-ten.vercel.app/api';
+		const baseUrl = '/api';
 		const url = baseUrl + '/airtable';
-		
-		return axios.post(url, form)
+
+		return axios.post(url, form);
 	},
 };
