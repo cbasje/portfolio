@@ -15,6 +15,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+import sanitizeHtml from 'sanitize-html';
 import marked from 'marked';
 
 export default defineComponent({
@@ -25,8 +26,17 @@ export default defineComponent({
 		},
 	},
 	computed: {
+		
 		compiledMarkdown() {
-			return marked(this.markdown);
+			const defaultOptions = {
+				allowedTags: ['a'],
+				allowedAttributes: {
+					a: ['href'],
+				},
+			};
+
+			const html = marked(this.markdown);
+			return sanitizeHtml(html, defaultOptions);
 		},
 	},
 });
